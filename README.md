@@ -42,6 +42,23 @@ The project is architected as a **full-stack monorepo** containing a React Nativ
 
 ---
 
+## Screenshots
+
+<p align="center">
+  <img src="screenshots/home.png" alt="AI Daily Briefing" width="180" />
+  <img src="screenshots/schedule.png" alt="Schedule at a Glance" width="180" />
+  <img src="screenshots/status.png" alt="Live Status Reports" width="180" />
+  <img src="screenshots/chat.png" alt="Family Chat" width="180" />
+</p>
+
+<p align="center">
+  <img src="screenshots/media.png" alt="Media Gallery" width="180" />
+  <img src="screenshots/add_event.png" alt="Smart Event Creation" width="180" />
+  <img src="screenshots/settings.png" alt="Family Settings" width="180" />
+</p>
+
+---
+
 ## Architecture
 
 RideFlow follows a layered monorepo architecture where the mobile client and API server share types, validation schemas, and business logic through a co-located codebase. This eliminates the contract drift that plagues separate frontend/backend repositories and enables end-to-end type safety from database queries through to rendered UI components.
