@@ -151,6 +151,7 @@
       border-radius: 36px;
       padding: 12px;
       box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+      flex-shrink: 0;
     }
     .phone-screen {
       width: 100%; height: 100%;
@@ -159,6 +160,12 @@
       overflow: hidden;
       display: flex; flex-direction: column;
     }
+    .phone-screen img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 26px;
+    }
     .phone-screen.white-bg { background: white; }
     .phone-status-bar {
       display: flex; justify-content: space-between; align-items: center;
@@ -166,6 +173,10 @@
     }
     .phone-content { flex: 1; padding: 0 16px 16px; overflow: hidden; }
     .phone-content h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; }
+    .phone-label {
+      text-align: center; margin-top: 12px;
+      font-size: 0.85rem; font-weight: 600; color: var(--text-secondary);
+    }
 
     .mini-card {
       background: white; border-radius: 12px;
@@ -415,7 +426,7 @@
         <span class="gradient">Intelligently Coordinated</span>
       </h1>
       <p>
-        RideFlow uses AI to help families schedule rides, coordinate with riders, and keep everyone safe. Just say "Pick up Rowan from soccer at 3pm" and the AI handles the rest.
+        RideFlow uses AI to help families schedule rides, coordinate with riders, and keep everyone safe. Just say "Pick up Emma from soccer at 3pm" and the AI handles the rest.
       </p>
       <div class="hero-buttons">
         <a href="#download" class="btn-primary">
@@ -446,84 +457,57 @@
 
   <!-- App Preview -->
   <section class="app-preview">
-    <!-- Phone 1: Home with AI Briefing -->
-    <div class="phone-frame">
-      <div class="phone-screen">
-        <div class="phone-status-bar">
-          <span>9:41</span>
-          <span>&#9679;&#9679;&#9679;</span>
-        </div>
-        <div class="phone-content">
-          <h3>Today's Schedule</h3>
-          <div class="ai-card">
-            <div class="ai-label">AI Daily Briefing</div>
-            <div class="ai-text">3 rides today. Rowan has soccer at 4pm &mdash; rider confirmed. Ian's 3:15 pickup needs a driver.</div>
-          </div>
-          <div class="mini-card">
-            <div class="mc-title">School Pickup &mdash; Ian</div>
-            <div class="mc-sub">3:15 PM &middot; Lincoln Elementary</div>
-            <span class="mc-badge badge-amber">Pending</span>
-          </div>
-          <div class="mini-card">
-            <div class="mc-title">Soccer &mdash; Rowan</div>
-            <div class="mc-sub">4:00 PM &middot; City Sports Complex</div>
-            <span class="mc-badge badge-green">Confirmed</span>
-          </div>
-          <div class="mini-card">
-            <div class="mc-title">Piano &mdash; Ian</div>
-            <div class="mc-sub">5:30 PM &middot; Music Academy</div>
-            <span class="mc-badge badge-pink">Upcoming</span>
-          </div>
+    <div>
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <img src="screenshots/raw_home.png" alt="RideFlow Home Screen with AI Daily Briefing" loading="lazy">
         </div>
       </div>
+      <div class="phone-label">AI Daily Briefing</div>
     </div>
-
-    <!-- Phone 2: AI Quick Fill -->
-    <div class="phone-frame">
-      <div class="phone-screen white-bg">
-        <div class="phone-status-bar">
-          <span>9:41</span>
-          <span>&#9679;&#9679;&#9679;</span>
-        </div>
-        <div class="phone-content">
-          <h3>AI Quick Fill</h3>
-          <div style="background: #F3E5F5; border: 1px solid #CE93D8; border-radius: 12px; padding: 10px 12px; margin-bottom: 10px;">
-            <div style="font-size: 0.6rem; font-weight: 700; color: #7B1FA2; margin-bottom: 4px;">Type or speak naturally</div>
-            <div style="background: white; border-radius: 8px; padding: 8px; font-size: 0.65rem; color: var(--text);">"Pick up Rowan from soccer at 3pm Tuesday"</div>
-          </div>
-          <div style="font-size: 0.6rem; font-weight: 600; color: var(--success); margin-bottom: 6px;">Auto-filled:</div>
-          <div class="mini-card">
-            <div class="mc-sub">Child: <strong>Rowan</strong></div>
-            <div class="mc-sub">Action: <strong>Pickup</strong></div>
-            <div class="mc-sub">Location: <strong>City Sports</strong></div>
-            <div class="mc-sub">Time: <strong>3:00 PM, Tue</strong></div>
-          </div>
-          <div style="background: var(--primary); color: white; text-align: center; padding: 8px; border-radius: 10px; font-size: 0.7rem; font-weight: 600; margin-top: 8px;">Save Event</div>
+    <div>
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <img src="screenshots/raw_schedule.png" alt="RideFlow Schedule View" loading="lazy">
         </div>
       </div>
+      <div class="phone-label">Schedule View</div>
     </div>
-
-    <!-- Phone 3: Chat with @AI -->
-    <div class="phone-frame">
-      <div class="phone-screen white-bg">
-        <div class="phone-status-bar">
-          <span>9:41</span>
-          <span>&#9679;&#9679;&#9679;</span>
-        </div>
-        <div class="phone-content">
-          <h3>Family Chat</h3>
-          <div class="mini-chat">
-            <div class="chat-bubble chat-sent">Anyone confirmed for Rowan's soccer pickup?</div>
-            <div class="chat-bubble chat-received">I can do it! I'll be there at 3:45.</div>
-            <div class="chat-bubble chat-sent">@AI what's tomorrow look like?</div>
-            <div class="chat-bubble chat-ai">
-              <div class="ai-name">AI Assistant</div>
-              Tomorrow you have 4 rides. All riders confirmed. Ian's school at 8am, Rowan at 8:15.
-            </div>
-            <div class="chat-bubble chat-sent">Perfect, thanks!</div>
-          </div>
+    <div>
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <img src="screenshots/raw_family_chat.png" alt="RideFlow Family Chat with @AI" loading="lazy">
         </div>
       </div>
+      <div class="phone-label">Family Chat</div>
+    </div>
+  </section>
+
+  <!-- More Screenshots -->
+  <section class="app-preview" style="padding-top: 0;">
+    <div>
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <img src="screenshots/raw_status.png" alt="RideFlow Status Reports" loading="lazy">
+        </div>
+      </div>
+      <div class="phone-label">Status Reports</div>
+    </div>
+    <div>
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <img src="screenshots/raw_add_event.png" alt="RideFlow Smart Event Creation" loading="lazy">
+        </div>
+      </div>
+      <div class="phone-label">Smart Event Creation</div>
+    </div>
+    <div>
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <img src="screenshots/raw_settings.png" alt="RideFlow Family Settings" loading="lazy">
+        </div>
+      </div>
+      <div class="phone-label">Family Settings</div>
     </div>
   </section>
 
@@ -539,7 +523,7 @@
         <div class="ai-feature-card">
           <div class="ai-icon">&#9997;</div>
           <h3>Natural Language Scheduling</h3>
-          <p>Type "Pick up Rowan from soccer at 3pm Tuesday" and the AI auto-fills the event form. Add voice input for hands-free creation.</p>
+          <p>Type "Pick up Emma from soccer at 3pm Tuesday" and the AI auto-fills the event form. Add voice input for hands-free creation.</p>
         </div>
         <div class="ai-feature-card">
           <div class="ai-icon">&#129302;</div>
@@ -630,7 +614,7 @@
         <div class="step">
           <div class="step-number">2</div>
           <h3>Add Your Schedule</h3>
-          <p>Type naturally or use voice input. Say "Pick up Rowan from soccer at 3pm" and the AI creates the event.</p>
+          <p>Type naturally or use voice input. Say "Pick up Emma from soccer at 3pm" and the AI creates the event.</p>
         </div>
         <div class="step">
           <div class="step-number">3</div>
