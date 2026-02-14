@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RideFlow — AI-Powered Family Ride Coordination</title>
+  <meta name="description" content="RideFlow uses AI to help families coordinate rides for their children. Natural language scheduling, smart alerts, @AI chat assistant, and real-time tracking.">
+  <meta property="og:title" content="RideFlow — AI-Powered Family Ride Coordination">
+  <meta property="og:description" content="Coordinate rides for your family with AI-powered scheduling, real-time tracking, and smart alerts.">
+  <meta property="og:image" content="https://files.manuscdn.com/user_upload_by_module/session_file/310519663319984753/UmCoYtfqdmmvGBhC.png">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="https://files.manuscdn.com/user_upload_by_module/session_file/310519663319984753/UmCoYtfqdmmvGBhC.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #E91E63;
+      --primary-dark: #C2185B;
+      --primary-light: #FCE4EC;
+      --bg: #FFFFFF;
+      --bg-warm: #F5F0EB;
+      --bg-alt: #FAF8F5;
+      --text: #1A1A1A;
+      --text-secondary: #6B6560;
+      --text-muted: #A8A29E;
+      --border: #D6CFC8;
+      --success: #00897B;
+      --gradient-start: #E91E63;
+      --gradient-end: #9C27B0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Navigation ──────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 24px;
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none; color: var(--text);
+    }
+    .nav-brand img { width: 40px; height: 40px; border-radius: 10px; }
+    .nav-brand span { font-weight: 700; font-size: 1.25rem; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a {
+      text-decoration: none; color: var(--text-secondary);
+      font-size: 0.95rem; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-cta {
+      background: var(--primary) !important; color: white !important;
+      padding: 10px 24px !important; border-radius: 10px !important;
+      font-weight: 600 !important; transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--primary-dark) !important; }
+
+    /* ── Hero ──────────────────────────────────── */
+    .hero {
+      padding: 140px 24px 80px;
+      text-align: center;
+      background: linear-gradient(180deg, var(--bg-warm) 0%, var(--bg) 100%);
+    }
+    .hero-inner { max-width: 800px; margin: 0 auto; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: white; border: 1px solid var(--border);
+      padding: 6px 16px; border-radius: 100px;
+      font-size: 0.85rem; color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+    .hero-badge .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--success);
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 3.75rem);
+      font-weight: 800; line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+    }
+    .hero h1 .gradient {
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 1.2rem; color: var(--text-secondary);
+      max-width: 640px; margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+    .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--primary); color: white;
+      padding: 14px 32px; border-radius: 12px;
+      font-size: 1.05rem; font-weight: 600;
+      text-decoration: none; transition: all 0.2s;
+      box-shadow: 0 4px 14px rgba(233,30,99,0.3);
+    }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(233,30,99,0.35); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: white; color: var(--text);
+      padding: 14px 32px; border-radius: 12px;
+      font-size: 1.05rem; font-weight: 600;
+      text-decoration: none; transition: all 0.2s;
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { background: var(--bg-alt); transform: translateY(-1px); }
+
+    .hero-stats {
+      display: flex; justify-content: center; gap: 48px;
+      margin-top: 48px; padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat .number { font-size: 1.75rem; font-weight: 800; color: var(--primary); }
+    .hero-stat .label { font-size: 0.85rem; color: var(--text-muted); margin-top: 2px; }
+
+    /* ── App Preview ──────────────────────────────────── */
+    .app-preview {
+      max-width: 1000px; margin: 0 auto;
+      padding: 0 24px 80px;
+      display: flex; justify-content: center; gap: 24px;
+      flex-wrap: wrap;
+    }
+    .phone-frame {
+      width: 260px; height: 520px;
+      background: linear-gradient(145deg, #1a1a2e, #16213e);
+      border-radius: 36px;
+      padding: 12px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+    }
+    .phone-screen {
+      width: 100%; height: 100%;
+      background: var(--bg-warm);
+      border-radius: 26px;
+      overflow: hidden;
+      display: flex; flex-direction: column;
+    }
+    .phone-screen.white-bg { background: white; }
+    .phone-status-bar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 20px 8px; font-size: 0.7rem; font-weight: 600;
+    }
+    .phone-content { flex: 1; padding: 0 16px 16px; overflow: hidden; }
+    .phone-content h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; }
+
+    .mini-card {
+      background: white; border-radius: 12px;
+      padding: 12px; margin-bottom: 8px;
+      border: 1px solid var(--border);
+    }
+    .mini-card .mc-title { font-size: 0.75rem; font-weight: 600; }
+    .mini-card .mc-sub { font-size: 0.65rem; color: var(--text-muted); margin-top: 2px; }
+    .mini-card .mc-badge {
+      display: inline-block; font-size: 0.6rem; font-weight: 600;
+      padding: 2px 8px; border-radius: 100px; margin-top: 6px;
+    }
+    .badge-green { background: #E0F2F1; color: #00695C; }
+    .badge-pink { background: #FCE4EC; color: #C2185B; }
+    .badge-amber { background: #FFF8E1; color: #F57F17; }
+    .badge-purple { background: #F3E5F5; color: #7B1FA2; }
+
+    .ai-card {
+      background: #FFF3E0; border: 1px solid #FFB74D;
+      border-radius: 12px; padding: 10px 12px; margin-bottom: 8px;
+    }
+    .ai-card .ai-label { font-size: 0.6rem; font-weight: 700; color: #E65100; margin-bottom: 4px; }
+    .ai-card .ai-text { font-size: 0.6rem; color: var(--text); line-height: 1.4; }
+
+    .mini-chat { display: flex; flex-direction: column; gap: 6px; }
+    .chat-bubble {
+      padding: 8px 12px; border-radius: 14px;
+      font-size: 0.65rem; max-width: 80%; line-height: 1.4;
+    }
+    .chat-sent { background: var(--primary); color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
+    .chat-received { background: white; color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid var(--border); }
+    .chat-ai { background: #F3E5F5; color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid #CE93D8; }
+    .chat-ai .ai-name { font-size: 0.55rem; font-weight: 700; color: #7B1FA2; margin-bottom: 2px; }
+
+    /* ── AI Section ──────────────────────────────────── */
+    .ai-section {
+      padding: 80px 24px;
+      background: linear-gradient(180deg, #FDF2F8 0%, var(--bg) 100%);
+    }
+    .ai-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      text-align: center; font-size: 0.85rem; font-weight: 600;
+      color: var(--primary); text-transform: uppercase;
+      letter-spacing: 0.1em; margin-bottom: 12px;
+    }
+    .section-title {
+      text-align: center; font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 800; letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .section-subtitle {
+      text-align: center; font-size: 1.1rem;
+      color: var(--text-secondary); max-width: 640px;
+      margin: 0 auto 56px;
+    }
+    .ai-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .ai-feature-card {
+      background: white; border-radius: 16px;
+      padding: 32px; border: 1px solid var(--border);
+      transition: box-shadow 0.3s, transform 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .ai-feature-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+    }
+    .ai-feature-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.06); transform: translateY(-2px); }
+    .ai-feature-card .ai-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin-bottom: 20px;
+      background: var(--primary-light);
+    }
+    .ai-feature-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+    .ai-feature-card p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; }
+
+    /* ── Features ──────────────────────────────────── */
+    .features {
+      padding: 80px 24px;
+      background: var(--bg-alt);
+    }
+    .features-inner { max-width: 1100px; margin: 0 auto; }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .feature-card {
+      background: white; border-radius: 16px;
+      padding: 32px; border: 1px solid var(--border);
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .feature-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.06); transform: translateY(-2px); }
+    .feature-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin-bottom: 20px;
+    }
+    .fi-pink { background: #FCE4EC; }
+    .fi-green { background: #E0F2F1; }
+    .fi-purple { background: #F3E5F5; }
+    .fi-amber { background: #FFF8E1; }
+    .fi-blue { background: #E3F2FD; }
+    .fi-cyan { background: #E0F7FA; }
+    .feature-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+    .feature-card p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; }
+
+    /* ── How It Works ──────────────────────────────────── */
+    .how-it-works { padding: 80px 24px; }
+    .how-inner { max-width: 900px; margin: 0 auto; }
+    .steps {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px; margin-top: 48px;
+    }
+    .step { text-align: center; }
+    .step-number {
+      width: 56px; height: 56px; border-radius: 16px;
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      color: white; font-size: 1.25rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .step h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+    .step p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
+
+    /* ── Safety ──────────────────────────────────── */
+    .safety { padding: 80px 24px; background: var(--bg-alt); }
+    .safety-inner { max-width: 900px; margin: 0 auto; }
+    .safety-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px; margin-top: 48px;
+    }
+    .safety-item {
+      display: flex; gap: 16px; align-items: flex-start;
+      background: white; padding: 24px; border-radius: 14px;
+      border: 1px solid var(--border);
+    }
+    .safety-icon { font-size: 1.5rem; flex-shrink: 0; }
+    .safety-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .safety-item p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; }
+
+    /* ── CTA ──────────────────────────────────── */
+    .cta { padding: 80px 24px; text-align: center; }
+    .cta-inner {
+      max-width: 700px; margin: 0 auto;
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      border-radius: 24px; padding: 64px 40px;
+      color: white;
+    }
+    .cta-inner h2 {
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      font-weight: 800; margin-bottom: 16px;
+    }
+    .cta-inner p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 32px; }
+    .btn-white {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: white; color: var(--primary);
+      padding: 14px 32px; border-radius: 12px;
+      font-size: 1.05rem; font-weight: 700;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .btn-white:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+
+    /* Store Badges */
+    .store-badges { padding: 64px 24px 80px; text-align: center; }
+    .store-badges-inner { max-width: 600px; margin: 0 auto; }
+    .store-badges-inner h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 800; margin-bottom: 8px; letter-spacing: -0.02em;
+    }
+    .store-badges-inner p { font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 32px; }
+    .badge-row { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+    .store-badge {
+      display: inline-block; transition: transform 0.2s, opacity 0.2s;
+      border-radius: 12px; overflow: hidden;
+    }
+    .store-badge:hover { transform: translateY(-2px); opacity: 0.9; }
+    .store-badge img { height: 54px; width: auto; display: block; }
+    .store-badge-google img { height: 80px; margin: -13px -16px; }
+
+    /* ── Footer ──────────────────────────────────── */
+    footer { padding: 48px 24px; border-top: 1px solid var(--border); }
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 24px;
+    }
+    .footer-brand { display: flex; align-items: center; gap: 10px; }
+    .footer-brand img { width: 32px; height: 32px; border-radius: 8px; }
+    .footer-brand span { font-weight: 700; font-size: 1.1rem; }
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+    .footer-links a {
+      text-decoration: none; color: var(--text-secondary);
+      font-size: 0.9rem; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--primary); }
+    .footer-copy { font-size: 0.85rem; color: var(--text-muted); width: 100%; text-align: center; margin-top: 24px; }
+
+    /* ── Responsive ──────────────────────────────────── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero { padding: 120px 20px 60px; }
+      .hero-stats { gap: 24px; }
+      .app-preview { gap: 16px; }
+      .phone-frame { width: 220px; height: 440px; }
+      .features, .how-it-works, .safety, .cta, .ai-section { padding: 60px 20px; }
+      .footer-inner { justify-content: center; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .phone-frame:nth-child(3) { display: none; }
+      .hero-buttons { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">
+        <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663319984753/UmCoYtfqdmmvGBhC.png" alt="RideFlow">
+        <span>RideFlow</span>
+      </a>
+      <div class="nav-links">
+        <a href="#ai">AI Features</a>
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#safety">Safety</a>
+        <a href="#download" class="nav-cta">Download App</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        AI-Powered &middot; iOS &amp; Android
+      </div>
+      <h1>
+        Family Rides,<br>
+        <span class="gradient">Intelligently Coordinated</span>
+      </h1>
+      <p>
+        RideFlow uses AI to help families schedule rides, coordinate with riders, and keep everyone safe. Just say "Pick up Rowan from soccer at 3pm" and the AI handles the rest.
+      </p>
+      <div class="hero-buttons">
+        <a href="#download" class="btn-primary">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 3v12m0 0l-4-4m4 4l4-4"/></svg>
+          Download Free
+        </a>
+        <a href="#ai" class="btn-secondary">
+          See AI Features
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="number">10+</div>
+          <div class="label">AI Features</div>
+        </div>
+        <div class="hero-stat">
+          <div class="number">40+</div>
+          <div class="label">App Screens</div>
+        </div>
+        <div class="hero-stat">
+          <div class="number">100%</div>
+          <div class="label">Free to Use</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- App Preview -->
+  <section class="app-preview">
+    <!-- Phone 1: Home with AI Briefing -->
+    <div class="phone-frame">
+      <div class="phone-screen">
+        <div class="phone-status-bar">
+          <span>9:41</span>
+          <span>&#9679;&#9679;&#9679;</span>
+        </div>
+        <div class="phone-content">
+          <h3>Today's Schedule</h3>
+          <div class="ai-card">
+            <div class="ai-label">AI Daily Briefing</div>
+            <div class="ai-text">3 rides today. Rowan has soccer at 4pm &mdash; rider confirmed. Ian's 3:15 pickup needs a driver.</div>
+          </div>
+          <div class="mini-card">
+            <div class="mc-title">School Pickup &mdash; Ian</div>
+            <div class="mc-sub">3:15 PM &middot; Lincoln Elementary</div>
+            <span class="mc-badge badge-amber">Pending</span>
+          </div>
+          <div class="mini-card">
+            <div class="mc-title">Soccer &mdash; Rowan</div>
+            <div class="mc-sub">4:00 PM &middot; City Sports Complex</div>
+            <span class="mc-badge badge-green">Confirmed</span>
+          </div>
+          <div class="mini-card">
+            <div class="mc-title">Piano &mdash; Ian</div>
+            <div class="mc-sub">5:30 PM &middot; Music Academy</div>
+            <span class="mc-badge badge-pink">Upcoming</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phone 2: AI Quick Fill -->
+    <div class="phone-frame">
+      <div class="phone-screen white-bg">
+        <div class="phone-status-bar">
+          <span>9:41</span>
+          <span>&#9679;&#9679;&#9679;</span>
+        </div>
+        <div class="phone-content">
+          <h3>AI Quick Fill</h3>
+          <div style="background: #F3E5F5; border: 1px solid #CE93D8; border-radius: 12px; padding: 10px 12px; margin-bottom: 10px;">
+            <div style="font-size: 0.6rem; font-weight: 700; color: #7B1FA2; margin-bottom: 4px;">Type or speak naturally</div>
+            <div style="background: white; border-radius: 8px; padding: 8px; font-size: 0.65rem; color: var(--text);">"Pick up Rowan from soccer at 3pm Tuesday"</div>
+          </div>
+          <div style="font-size: 0.6rem; font-weight: 600; color: var(--success); margin-bottom: 6px;">Auto-filled:</div>
+          <div class="mini-card">
+            <div class="mc-sub">Child: <strong>Rowan</strong></div>
+            <div class="mc-sub">Action: <strong>Pickup</strong></div>
+            <div class="mc-sub">Location: <strong>City Sports</strong></div>
+            <div class="mc-sub">Time: <strong>3:00 PM, Tue</strong></div>
+          </div>
+          <div style="background: var(--primary); color: white; text-align: center; padding: 8px; border-radius: 10px; font-size: 0.7rem; font-weight: 600; margin-top: 8px;">Save Event</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phone 3: Chat with @AI -->
+    <div class="phone-frame">
+      <div class="phone-screen white-bg">
+        <div class="phone-status-bar">
+          <span>9:41</span>
+          <span>&#9679;&#9679;&#9679;</span>
+        </div>
+        <div class="phone-content">
+          <h3>Family Chat</h3>
+          <div class="mini-chat">
+            <div class="chat-bubble chat-sent">Anyone confirmed for Rowan's soccer pickup?</div>
+            <div class="chat-bubble chat-received">I can do it! I'll be there at 3:45.</div>
+            <div class="chat-bubble chat-sent">@AI what's tomorrow look like?</div>
+            <div class="chat-bubble chat-ai">
+              <div class="ai-name">AI Assistant</div>
+              Tomorrow you have 4 rides. All riders confirmed. Ian's school at 8am, Rowan at 8:15.
+            </div>
+            <div class="chat-bubble chat-sent">Perfect, thanks!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Features (NEW) -->
+  <section class="ai-section" id="ai">
+    <div class="ai-inner">
+      <div class="section-label">AI-Powered</div>
+      <h2 class="section-title">Your Intelligent Ride Assistant</h2>
+      <p class="section-subtitle">
+        RideFlow's AI understands your family's schedule, detects problems before they happen, and helps you coordinate rides with natural language.
+      </p>
+      <div class="ai-grid">
+        <div class="ai-feature-card">
+          <div class="ai-icon">&#9997;</div>
+          <h3>Natural Language Scheduling</h3>
+          <p>Type "Pick up Rowan from soccer at 3pm Tuesday" and the AI auto-fills the event form. Add voice input for hands-free creation.</p>
+        </div>
+        <div class="ai-feature-card">
+          <div class="ai-icon">&#129302;</div>
+          <h3>@AI Chat Assistant</h3>
+          <p>Ask @AI anything in your family or group chat. Get schedule summaries, check ride availability, or find out who's driving tomorrow.</p>
+        </div>
+        <div class="ai-feature-card">
+          <div class="ai-icon">&#127774;</div>
+          <h3>Daily Briefing</h3>
+          <p>Every morning, get a personalized AI summary of today's rides, potential conflicts, and what needs your attention.</p>
+        </div>
+        <div class="ai-feature-card">
+          <div class="ai-icon">&#9888;</div>
+          <h3>Proactive Smart Alerts</h3>
+          <p>AI detects overdue rides, time conflicts, tight travel windows, and unassigned events before they become problems.</p>
+        </div>
+        <div class="ai-feature-card">
+          <div class="ai-icon">&#128202;</div>
+          <h3>Weekly Recap</h3>
+          <p>AI-generated end-of-week summary with ride stats, on-time rates, top riders, and actionable tips for the next week.</p>
+        </div>
+        <div class="ai-feature-card">
+          <div class="ai-icon">&#128161;</div>
+          <h3>Smart Suggestions</h3>
+          <p>AI detects recurring patterns and suggests missing events, predicts scheduling needs, and recommends optimizations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Features -->
+  <section class="features" id="features">
+    <div class="features-inner">
+      <div class="section-label">Features</div>
+      <h2 class="section-title">Everything Your Family Needs</h2>
+      <p class="section-subtitle">
+        From scheduling to real-time tracking, RideFlow covers every aspect of coordinating rides for your children.
+      </p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon fi-pink">&#128197;</div>
+          <h3>Smart Scheduling</h3>
+          <p>Day, week, and month views with recurring events, multi-child support, color-coded timelines, and automatic reminders.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon fi-green">&#128205;</div>
+          <h3>Real-Time Location</h3>
+          <p>Track your rider's location on an interactive map with speed, ETA, and geofence arrival alerts.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon fi-purple">&#128247;</div>
+          <h3>Photo &amp; Video Updates</h3>
+          <p>Riders share status reports with photos and videos. AI-powered notes automatically describe what's happening.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon fi-amber">&#128172;</div>
+          <h3>Family &amp; Group Chat</h3>
+          <p>Built-in messaging for families and ride groups. Share updates, coordinate in real time, and ask @AI for help.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon fi-blue">&#128276;</div>
+          <h3>Smart Notifications</h3>
+          <p>Configurable push notifications with smart alert preferences. Set quiet hours and choose which alerts matter most.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon fi-cyan">&#127911;</div>
+          <h3>Voice Input</h3>
+          <p>Hands-free event creation with voice recording and transcription. Dictate ride details while on the go.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="how-inner">
+      <div class="section-label">How It Works</div>
+      <h2 class="section-title">Get Started in Minutes</h2>
+      <p class="section-subtitle">
+        Setting up RideFlow is quick and easy. Here's how your family gets coordinated.
+      </p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Create Your Family</h3>
+          <p>Sign in with Google, create a family group, and invite your riders with a simple invite code or QR scan.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Add Your Schedule</h3>
+          <p>Type naturally or use voice input. Say "Pick up Rowan from soccer at 3pm" and the AI creates the event.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Track &amp; Communicate</h3>
+          <p>Follow rides in real time, receive photo updates, and chat with your riders. Ask @AI for instant summaries.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <h3>Review &amp; Relax</h3>
+          <p>Get AI-powered weekly recaps, smart alerts for conflicts, and know your children are always safe.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Safety & Privacy -->
+  <section class="safety" id="safety">
+    <div class="safety-inner">
+      <div class="section-label">Safety &amp; Privacy</div>
+      <h2 class="section-title">Built with Security First</h2>
+      <p class="section-subtitle">
+        Your family's data is protected with industry-standard security practices.
+      </p>
+      <div class="safety-grid">
+        <div class="safety-item">
+          <span class="safety-icon">&#128274;</span>
+          <div>
+            <h4>Google OAuth</h4>
+            <p>Secure authentication through Google. We never store passwords.</p>
+          </div>
+        </div>
+        <div class="safety-item">
+          <span class="safety-icon">&#128737;</span>
+          <div>
+            <h4>Family-Scoped Access</h4>
+            <p>Data is strictly isolated per family. Members can only see their own family's information.</p>
+          </div>
+        </div>
+        <div class="safety-item">
+          <span class="safety-icon">&#128220;</span>
+          <div>
+            <h4>Audit Logging</h4>
+            <p>Every data access is logged for transparency and accountability.</p>
+          </div>
+        </div>
+        <div class="safety-item">
+          <span class="safety-icon">&#128272;</span>
+          <div>
+            <h4>Encrypted Data</h4>
+            <p>All data encrypted in transit with TLS. Location data only shared with authorized family members.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Download Badges -->
+  <section class="store-badges" id="download">
+    <div class="store-badges-inner">
+      <h2>Download RideFlow</h2>
+      <p>Available on iOS and Android</p>
+      <div class="badge-row">
+        <a href="#" class="store-badge" aria-label="Download on the App Store">
+          <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" height="54">
+        </a>
+        <a href="#" class="store-badge store-badge-google" aria-label="Get it on Google Play">
+          <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" height="54">
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663319984753/UmCoYtfqdmmvGBhC.png" alt="RideFlow">
+        <span>RideFlow</span>
+      </div>
+      <div class="footer-links">
+        <a href="#ai">AI Features</a>
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#safety">Safety</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="mailto:support@ridehelp.top">Contact</a>
+      </div>
+      <div class="footer-copy">
+        &copy; 2026 RideFlow. All rights reserved. Made with care for families everywhere.
+      </div>
+    </div>
+  </footer>
+
+  <!-- GDPR Cookie Consent Banner -->
+  <div id="cookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a1a2e;color:#fff;padding:16px 24px;z-index:9999;box-shadow:0 -2px 12px rgba(0,0,0,0.2);font-family:Inter,sans-serif;">
+    <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+      <div style="flex:1;min-width:280px;">
+        <p style="font-size:14px;line-height:1.5;margin:0;">We use cookies to improve your experience and analyze site traffic. By continuing to use this site, you consent to our use of cookies. See our <a href="/privacy-policy.html" style="color:#E91E63;text-decoration:underline;">Privacy Policy</a> and <a href="/terms-of-service.html" style="color:#E91E63;text-decoration:underline;">Terms of Service</a>.</p>
+      </div>
+      <div style="display:flex;gap:8px;flex-shrink:0;">
+        <button onclick="acceptCookies()" style="background:#E91E63;color:#fff;border:none;padding:10px 24px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;">Accept All</button>
+        <button onclick="rejectCookies()" style="background:transparent;color:#fff;border:1px solid #555;padding:10px 24px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;">Reject Non-Essential</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function() {
+      var consent = localStorage.getItem('rideflow_cookie_consent');
+      if (!consent) {
+        document.getElementById('cookieBanner').style.display = 'block';
+      }
+    })();
+    function acceptCookies() {
+      localStorage.setItem('rideflow_cookie_consent', 'accepted');
+      document.getElementById('cookieBanner').style.display = 'none';
+    }
+    function rejectCookies() {
+      localStorage.setItem('rideflow_cookie_consent', 'rejected');
+      document.getElementById('cookieBanner').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
