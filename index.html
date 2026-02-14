@@ -393,22 +393,36 @@
     }
     .btn-white:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
 
-    /* Store Badges */
-    .store-badges { padding: 64px 24px 80px; text-align: center; }
-    .store-badges-inner { max-width: 600px; margin: 0 auto; }
-    .store-badges-inner h2 {
-      font-size: clamp(1.5rem, 3vw, 2rem);
-      font-weight: 800; margin-bottom: 8px; letter-spacing: -0.02em;
+    /* Get Started CTA */
+    .cta-section {
+      padding: 80px 24px 96px;
+      text-align: center;
+      background: linear-gradient(180deg, var(--bg) 0%, #FFF5F5 100%);
     }
-    .store-badges-inner p { font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 32px; }
-    .badge-row { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
-    .store-badge {
+    .cta-inner { max-width: 640px; margin: 0 auto; }
+    .cta-inner h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 800; margin-bottom: 16px; letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+    .cta-subtitle {
+      font-size: 1.1rem; color: var(--text-secondary);
+      margin-bottom: 40px; line-height: 1.6;
+    }
+    .cta-buttons { margin-bottom: 24px; }
+    .cta-appstore {
       display: inline-block; transition: transform 0.2s, opacity 0.2s;
       border-radius: 12px; overflow: hidden;
     }
-    .store-badge:hover { transform: translateY(-2px); opacity: 0.9; }
-    .store-badge img { height: 54px; width: auto; display: block; }
-    .store-badge-google img { height: 80px; margin: -13px -16px; }
+    .cta-appstore:hover { transform: translateY(-3px); opacity: 0.9; }
+    .cta-appstore img { height: 60px; width: auto; display: block; }
+    .cta-android {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border-radius: 24px;
+      background: var(--surface); color: var(--text-secondary);
+      font-size: 0.95rem; font-weight: 500;
+    }
+    .android-icon { font-size: 1.2rem; }
 
     /* ── Footer ──────────────────────────────────── */
     footer { padding: 48px 24px; border-top: 1px solid var(--border); }
@@ -680,18 +694,19 @@
   </section>
 
 
-  <!-- Download Badges -->
-  <section class="store-badges" id="download">
-    <div class="store-badges-inner">
-      <h2>Download RideFlow</h2>
-      <p>Available on iOS and Android</p>
-      <div class="badge-row">
-        <a href="#" class="store-badge" aria-label="Download on the App Store">
-          <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" height="54">
+  <!-- Get Started CTA -->
+  <section class="cta-section" id="download">
+    <div class="cta-inner">
+      <h2>Ready to Simplify Your Family's Rides?</h2>
+      <p class="cta-subtitle">Join families who have replaced scattered texts and missed pickups with one seamless app.</p>
+      <div class="cta-buttons">
+        <a href="#" class="cta-appstore" aria-label="Download on the App Store">
+          <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" height="60">
         </a>
-        <a href="#" class="store-badge store-badge-google" aria-label="Get it on Google Play">
-          <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" height="54">
-        </a>
+      </div>
+      <div class="cta-android">
+        <span class="android-icon">&#129302;</span>
+        <span>Android version coming soon</span>
       </div>
     </div>
   </section>
