@@ -211,6 +211,66 @@
     .chat-ai { background: #F3E5F5; color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid #CE93D8; }
     .chat-ai .ai-name { font-size: 0.55rem; font-weight: 700; color: #7B1FA2; margin-bottom: 2px; }
 
+    /* ── Video Preview ──────────────────────────────────── */
+    .video-preview {
+      padding: 40px 24px 80px;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 100%);
+    }
+    .video-inner {
+      max-width: 500px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .video-inner .section-label {
+      margin-bottom: 12px;
+    }
+    .video-inner .section-title {
+      margin-bottom: 12px;
+    }
+    .video-inner .section-subtitle {
+      margin-bottom: 40px;
+    }
+    .video-phone-frame {
+      width: 280px;
+      height: 580px;
+      background: linear-gradient(145deg, #1a1a2e, #16213e);
+      border-radius: 40px;
+      padding: 12px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.18);
+      margin: 0 auto;
+      position: relative;
+    }
+    .video-phone-frame::before {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 24px;
+      background: #1a1a2e;
+      border-radius: 12px;
+      z-index: 2;
+    }
+    .video-phone-screen {
+      width: 100%;
+      height: 100%;
+      border-radius: 30px;
+      overflow: hidden;
+      background: #000;
+    }
+    .video-phone-screen video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 30px;
+    }
+    .video-caption {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
     /* ── AI Section ──────────────────────────────────── */
     .ai-section {
       padding: 80px 24px;
@@ -391,6 +451,7 @@
     }
     @media (max-width: 480px) {
       .phone-frame:nth-child(3) { display: none; }
+      .video-phone-frame { width: 240px; height: 500px; }
       .hero-buttons { flex-direction: column; align-items: center; }
     }
   </style>
@@ -405,6 +466,7 @@
         <span>RideFlow</span>
       </a>
       <div class="nav-links">
+        <a href="#preview">Preview</a>
         <a href="#ai">AI Features</a>
         <a href="#features">Features</a>
         <a href="#how-it-works">How It Works</a>
@@ -508,6 +570,26 @@
         </div>
       </div>
       <div class="phone-label">Family Settings</div>
+    </div>
+  </section>
+
+  <!-- Video Preview -->
+  <section class="video-preview" id="preview">
+    <div class="video-inner">
+      <div class="section-label">App Preview</div>
+      <h2 class="section-title">See RideFlow in Action</h2>
+      <p class="section-subtitle">
+        Watch a quick walkthrough of how RideFlow helps families coordinate rides every day.
+      </p>
+      <div class="video-phone-frame">
+        <div class="video-phone-screen">
+          <video autoplay muted loop playsinline poster="screenshots/raw_home.png">
+            <source src="app_store_preview.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+      <p class="video-caption">21-second walkthrough of key features</p>
     </div>
   </section>
 
@@ -696,6 +778,7 @@
         <span>RideFlow</span>
       </div>
       <div class="footer-links">
+        <a href="#preview">Preview</a>
         <a href="#ai">AI Features</a>
         <a href="#features">Features</a>
         <a href="#how-it-works">How It Works</a>
