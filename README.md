@@ -147,13 +147,13 @@ The data model spans **32 PostgreSQL tables** organized into seven domains, all 
 
 | Domain | Tables | Description |
 |--------|--------|-------------|
-| **Identity** | `users`, `families`, `family_members`, `family_invite_codes`, `family_activity_log` | User accounts, family groups, membership with approval workflow, invite codes, and audit trail |
+| **Identity** | `users`, `families`, `family_members`, `family_invite_codes`, `family_activity_log` | User accounts, family groups, membership with approval workflow, and invite codes |
 | **Scheduling** | `ride_events`, `recurring_events`, `event_templates`, `app_settings` | Ride events with recurrence, reusable templates, and per-family configuration |
 | **Reporting** | `status_reports`, `status_report_likes`, `report_comments` | Ride completion reports with media, reactions, and threaded comments |
 | **Messaging** | `chat_messages`, `direct_messages`, `group_chats`, `group_chat_members`, `group_chat_messages` | Family chat, private DMs, and custom group conversations |
 | **Location** | `location_shares`, `location_updates` | GPS tracking sessions and coordinate history |
 | **Profiles** | `child_profiles`, `rider_profiles`, `emergency_contacts` | Children, rider credentials/vehicle info, and emergency contacts |
-| **Operations** | `notifications`, `notification_preferences`, `push_tokens`, `rider_reported_hours`, `helper_availability`, `audit_logs` | Push delivery, notification settings, payroll hours, availability, and system audit logs |
+| **Operations** | `notifications`, `notification_preferences`, `push_tokens`, `rider_reported_hours`, `helper_availability` | Push delivery, notification settings, payroll hours, and availability |
 
 ---
 
@@ -171,7 +171,6 @@ RideFlow implements defense-in-depth security across every layer of the stack.
 | **Transport** | HTTPS-only with HSTS, X-Content-Type-Options, X-Frame-Options, CSP headers |
 | **CORS** | Explicit origin allowlist (no wildcards) |
 | **CSRF** | Origin header validation for web platform requests |
-| **Audit** | Structured logging for all authentication events and sensitive data access |
 | **Privacy** | GDPR-compliant in-app data export and account deletion |
 
 ---
