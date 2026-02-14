@@ -12,570 +12,480 @@
   <link rel="icon" type="image/png" href="https://files.manuscdn.com/user_upload_by_module/session_file/310519663319984753/UmCoYtfqdmmvGBhC.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --primary: #E91E63;
-      --primary-dark: #C2185B;
-      --primary-light: #FCE4EC;
+      --text-primary: #0F172A;
+      --text-secondary: #475569;
+      --text-muted: #94A3B8;
+      --accent: #E11D48;
+      --accent-soft: #FFF1F2;
+      --accent-hover: #BE123C;
       --bg: #FFFFFF;
-      --bg-warm: #F5F0EB;
-      --bg-alt: #FAF8F5;
-      --text: #1A1A1A;
-      --text-secondary: #6B6560;
-      --text-muted: #A8A29E;
-      --border: #D6CFC8;
-      --success: #00897B;
-      --gradient-start: #E91E63;
-      --gradient-end: #9C27B0;
+      --bg-warm: #FAFAF9;
+      --bg-section: #F8FAFC;
+      --border: #E2E8F0;
+      --border-light: #F1F5F9;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      color: var(--text);
+      font-family: var(--sans);
+      color: var(--text-primary);
       background: var(--bg);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* ── Navigation ──────────────────────────────────── */
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Navigation ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-light);
+      transition: box-shadow 0.3s;
     }
+    nav.scrolled { box-shadow: 0 1px 12px rgba(0,0,0,0.04); }
     .nav-inner {
-      max-width: 1200px; margin: 0 auto;
+      max-width: 1120px; margin: 0 auto;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 16px 24px;
+      padding: 14px 32px;
     }
     .nav-brand {
-      display: flex; align-items: center; gap: 12px;
-      text-decoration: none; color: var(--text);
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; color: var(--text-primary);
     }
-    .nav-brand img { width: 40px; height: 40px; border-radius: 10px; }
-    .nav-brand span { font-weight: 700; font-size: 1.25rem; }
-    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-brand img { width: 36px; height: 36px; border-radius: 10px; }
+    .nav-brand span { font-family: var(--serif); font-size: 1.3rem; }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
     .nav-links a {
       text-decoration: none; color: var(--text-secondary);
-      font-size: 0.95rem; font-weight: 500;
+      font-size: 0.875rem; font-weight: 500;
       transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--primary); }
+    .nav-links a:hover { color: var(--text-primary); }
     .nav-cta {
-      background: var(--primary) !important; color: white !important;
-      padding: 10px 24px !important; border-radius: 10px !important;
-      font-weight: 600 !important; transition: background 0.2s !important;
+      background: var(--text-primary) !important; color: white !important;
+      padding: 9px 22px !important; border-radius: 8px !important;
+      font-weight: 600 !important; font-size: 0.875rem !important;
+      transition: opacity 0.2s !important;
     }
-    .nav-cta:hover { background: var(--primary-dark) !important; }
+    .nav-cta:hover { opacity: 0.85 !important; }
 
-    /* ── Hero ──────────────────────────────────── */
+    /* ── Hero ── */
     .hero {
-      padding: 140px 24px 80px;
-      text-align: center;
-      background: linear-gradient(180deg, var(--bg-warm) 0%, var(--bg) 100%);
+      padding: 160px 32px 100px;
+      max-width: 1120px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: center;
     }
-    .hero-inner { max-width: 800px; margin: 0 auto; }
-    .hero-badge {
+    .hero-content { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 8px;
-      background: white; border: 1px solid var(--border);
-      padding: 6px 16px; border-radius: 100px;
-      font-size: 0.85rem; color: var(--text-secondary);
-      margin-bottom: 24px;
-    }
-    .hero-badge .dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--success);
-    }
-    .hero h1 {
-      font-size: clamp(2.5rem, 5vw, 3.75rem);
-      font-weight: 800; line-height: 1.1;
-      letter-spacing: -0.03em;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.08em;
       margin-bottom: 20px;
     }
-    .hero h1 .gradient {
-      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .hero-eyebrow .pulse {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 4.5vw, 3.5rem);
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+      color: var(--text-primary);
     }
     .hero p {
-      font-size: 1.2rem; color: var(--text-secondary);
-      max-width: 640px; margin: 0 auto 36px;
-      line-height: 1.7;
+      font-size: 1.125rem; color: var(--text-secondary);
+      line-height: 1.7; margin-bottom: 36px;
+      max-width: 480px;
     }
-    .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-    .btn-primary {
+    .hero-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .btn-dark {
       display: inline-flex; align-items: center; gap: 8px;
-      background: var(--primary); color: white;
-      padding: 14px 32px; border-radius: 12px;
-      font-size: 1.05rem; font-weight: 600;
-      text-decoration: none; transition: all 0.2s;
-      box-shadow: 0 4px 14px rgba(233,30,99,0.3);
+      background: var(--text-primary); color: white;
+      padding: 13px 28px; border-radius: 10px;
+      font-size: 0.95rem; font-weight: 600;
+      text-decoration: none; transition: opacity 0.2s;
     }
-    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(233,30,99,0.35); }
-    .btn-secondary {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: white; color: var(--text);
-      padding: 14px 32px; border-radius: 12px;
-      font-size: 1.05rem; font-weight: 600;
-      text-decoration: none; transition: all 0.2s;
-      border: 1px solid var(--border);
+    .btn-dark:hover { opacity: 0.85; }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--text-secondary); padding: 13px 20px;
+      font-size: 0.95rem; font-weight: 500;
+      text-decoration: none; transition: color 0.2s;
     }
-    .btn-secondary:hover { background: var(--bg-alt); transform: translateY(-1px); }
+    .btn-ghost:hover { color: var(--text-primary); }
+    .btn-ghost svg { transition: transform 0.2s; }
+    .btn-ghost:hover svg { transform: translateX(2px); }
 
-    .hero-stats {
-      display: flex; justify-content: center; gap: 48px;
-      margin-top: 48px; padding-top: 32px;
-      border-top: 1px solid var(--border);
+    .hero-visual {
+      display: flex; justify-content: center;
+      animation: fadeIn 1s 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      opacity: 0;
     }
-    .hero-stat { text-align: center; }
-    .hero-stat .number { font-size: 1.75rem; font-weight: 800; color: var(--primary); }
-    .hero-stat .label { font-size: 0.85rem; color: var(--text-muted); margin-top: 2px; }
-
-    /* ── App Preview ──────────────────────────────────── */
-    .app-preview {
-      max-width: 1000px; margin: 0 auto;
-      padding: 0 24px 80px;
-      display: flex; justify-content: center; gap: 24px;
-      flex-wrap: wrap;
+    .hero-phone {
+      width: 280px; height: 580px;
+      background: var(--text-primary);
+      border-radius: 40px; padding: 10px;
+      box-shadow: 0 40px 80px -20px rgba(15, 23, 42, 0.25),
+                  0 0 0 1px rgba(15, 23, 42, 0.05);
     }
-    .phone-frame {
-      width: 260px; height: 520px;
-      background: linear-gradient(145deg, #1a1a2e, #16213e);
-      border-radius: 36px;
-      padding: 12px;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.15);
-      flex-shrink: 0;
-    }
-    .phone-screen {
+    .hero-phone-screen {
       width: 100%; height: 100%;
-      background: var(--bg-warm);
-      border-radius: 26px;
-      overflow: hidden;
-      display: flex; flex-direction: column;
-    }
-    .phone-screen img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: top;
-      border-radius: 26px;
-    }
-    .phone-screen.white-bg { background: white; }
-    .phone-status-bar {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 12px 20px 8px; font-size: 0.7rem; font-weight: 600;
-    }
-    .phone-content { flex: 1; padding: 0 16px 16px; overflow: hidden; }
-    .phone-content h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; }
-    .phone-label {
-      text-align: center; margin-top: 12px;
-      font-size: 0.85rem; font-weight: 600; color: var(--text-secondary);
-    }
-
-    .mini-card {
-      background: white; border-radius: 12px;
-      padding: 12px; margin-bottom: 8px;
-      border: 1px solid var(--border);
-    }
-    .mini-card .mc-title { font-size: 0.75rem; font-weight: 600; }
-    .mini-card .mc-sub { font-size: 0.65rem; color: var(--text-muted); margin-top: 2px; }
-    .mini-card .mc-badge {
-      display: inline-block; font-size: 0.6rem; font-weight: 600;
-      padding: 2px 8px; border-radius: 100px; margin-top: 6px;
-    }
-    .badge-green { background: #E0F2F1; color: #00695C; }
-    .badge-pink { background: #FCE4EC; color: #C2185B; }
-    .badge-amber { background: #FFF8E1; color: #F57F17; }
-    .badge-purple { background: #F3E5F5; color: #7B1FA2; }
-
-    .ai-card {
-      background: #FFF3E0; border: 1px solid #FFB74D;
-      border-radius: 12px; padding: 10px 12px; margin-bottom: 8px;
-    }
-    .ai-card .ai-label { font-size: 0.6rem; font-weight: 700; color: #E65100; margin-bottom: 4px; }
-    .ai-card .ai-text { font-size: 0.6rem; color: var(--text); line-height: 1.4; }
-
-    .mini-chat { display: flex; flex-direction: column; gap: 6px; }
-    .chat-bubble {
-      padding: 8px 12px; border-radius: 14px;
-      font-size: 0.65rem; max-width: 80%; line-height: 1.4;
-    }
-    .chat-sent { background: var(--primary); color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
-    .chat-received { background: white; color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid var(--border); }
-    .chat-ai { background: #F3E5F5; color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid #CE93D8; }
-    .chat-ai .ai-name { font-size: 0.55rem; font-weight: 700; color: #7B1FA2; margin-bottom: 2px; }
-
-    /* ── Video Preview ──────────────────────────────────── */
-    .video-preview {
-      padding: 40px 24px 80px;
-      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 100%);
-    }
-    .video-inner {
-      max-width: 500px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .video-inner .section-label {
-      margin-bottom: 12px;
-    }
-    .video-inner .section-title {
-      margin-bottom: 12px;
-    }
-    .video-inner .section-subtitle {
-      margin-bottom: 40px;
-    }
-    .video-phone-frame {
-      width: 280px;
-      height: 580px;
-      background: linear-gradient(145deg, #1a1a2e, #16213e);
-      border-radius: 40px;
-      padding: 12px;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.18);
-      margin: 0 auto;
-      position: relative;
-    }
-    /* Notch removed — it was overlapping the video content */
-    .video-phone-screen {
-      width: 100%;
-      height: 100%;
-      border-radius: 30px;
-      overflow: hidden;
+      border-radius: 32px; overflow: hidden;
       background: #000;
     }
-    .video-phone-screen video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 30px;
-    }
-    .video-caption {
-      margin-top: 20px;
-      font-size: 0.9rem;
-      color: var(--text-muted);
+    .hero-phone-screen video {
+      width: 100%; height: 100%;
+      object-fit: cover; border-radius: 32px;
     }
 
-    /* ── AI Section ──────────────────────────────────── */
-    .ai-section {
-      padding: 80px 24px;
-      background: linear-gradient(180deg, #FDF2F8 0%, var(--bg) 100%);
+    /* ── Stats ── */
+    .stats {
+      max-width: 1120px; margin: 0 auto;
+      padding: 0 32px 80px;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border);
+      border-radius: 16px; overflow: hidden;
     }
-    .ai-inner { max-width: 1100px; margin: 0 auto; }
-    .section-label {
-      text-align: center; font-size: 0.85rem; font-weight: 600;
-      color: var(--primary); text-transform: uppercase;
-      letter-spacing: 0.1em; margin-bottom: 12px;
+    .stat {
+      background: var(--bg);
+      padding: 36px 32px; text-align: center;
     }
-    .section-title {
-      text-align: center; font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-      font-weight: 800; letter-spacing: -0.02em;
-      margin-bottom: 12px;
+    .stat-number {
+      font-family: var(--serif);
+      font-size: 2.25rem; color: var(--text-primary);
+      margin-bottom: 4px;
     }
-    .section-subtitle {
-      text-align: center; font-size: 1.1rem;
-      color: var(--text-secondary); max-width: 640px;
-      margin: 0 auto 56px;
+    .stat-label { font-size: 0.875rem; color: var(--text-muted); font-weight: 500; }
+
+    /* ── Section shared ── */
+    .section-eyebrow {
+      font-size: 0.75rem; font-weight: 600; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.1em;
+      margin-bottom: 12px; text-align: center;
     }
+    .section-heading {
+      font-family: var(--serif);
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      text-align: center; margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+    .section-desc {
+      text-align: center; font-size: 1.05rem;
+      color: var(--text-secondary); max-width: 560px;
+      margin: 0 auto 56px; line-height: 1.7;
+    }
+
+    /* ── AI Features ── */
+    .ai-features { padding: 100px 32px; background: var(--bg-warm); }
+    .ai-features-inner { max-width: 1120px; margin: 0 auto; }
     .ai-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
     }
-    .ai-feature-card {
-      background: white; border-radius: 16px;
-      padding: 32px; border: 1px solid var(--border);
+    .ai-card {
+      background: var(--bg); border-radius: 14px;
+      padding: 32px 28px; border: 1px solid var(--border);
       transition: box-shadow 0.3s, transform 0.3s;
-      position: relative; overflow: hidden;
     }
-    .ai-feature-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+    .ai-card:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.04);
+      transform: translateY(-2px);
     }
-    .ai-feature-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.06); transform: translateY(-2px); }
-    .ai-feature-card .ai-icon {
-      width: 48px; height: 48px; border-radius: 12px;
+    .ai-card-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--accent-soft); color: var(--accent);
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem; margin-bottom: 20px;
-      background: var(--primary-light);
+      font-size: 1.1rem; margin-bottom: 20px; font-weight: 700;
     }
-    .ai-feature-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
-    .ai-feature-card p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; }
+    .ai-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .ai-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; }
 
-    /* ── Features ──────────────────────────────────── */
-    .features {
-      padding: 80px 24px;
-      background: var(--bg-alt);
-    }
-    .features-inner { max-width: 1100px; margin: 0 auto; }
+    /* ── Features ── */
+    .features { padding: 100px 32px; }
+    .features-inner { max-width: 1120px; margin: 0 auto; }
     .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
     }
-    .feature-card {
-      background: white; border-radius: 16px;
-      padding: 32px; border: 1px solid var(--border);
+    .feature-item {
+      padding: 32px 28px; border-radius: 14px;
+      border: 1px solid var(--border);
       transition: box-shadow 0.3s, transform 0.3s;
     }
-    .feature-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.06); transform: translateY(-2px); }
-    .feature-icon {
-      width: 48px; height: 48px; border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem; margin-bottom: 20px;
+    .feature-item:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.04);
+      transform: translateY(-2px);
     }
-    .fi-pink { background: #FCE4EC; }
-    .fi-green { background: #E0F2F1; }
-    .fi-purple { background: #F3E5F5; }
-    .fi-amber { background: #FFF8E1; }
-    .fi-blue { background: #E3F2FD; }
-    .fi-cyan { background: #E0F7FA; }
-    .feature-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
-    .feature-card p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; }
+    .feature-item-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; margin-bottom: 20px;
+    }
+    .fi-rose { background: #FFF1F2; }
+    .fi-emerald { background: #ECFDF5; }
+    .fi-violet { background: #F5F3FF; }
+    .fi-amber { background: #FFFBEB; }
+    .fi-sky { background: #F0F9FF; }
+    .fi-teal { background: #F0FDFA; }
+    .feature-item h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .feature-item p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; }
 
-    /* ── How It Works ──────────────────────────────────── */
-    .how-it-works { padding: 80px 24px; }
-    .how-inner { max-width: 900px; margin: 0 auto; }
+    /* ── How It Works ── */
+    .how-it-works { padding: 100px 32px; background: var(--bg-section); }
+    .how-inner { max-width: 960px; margin: 0 auto; }
     .steps {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 32px; margin-top: 48px;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
     }
     .step { text-align: center; }
-    .step-number {
-      width: 56px; height: 56px; border-radius: 16px;
-      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-      color: white; font-size: 1.25rem; font-weight: 800;
+    .step-num {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--text-primary); color: white;
+      font-family: var(--serif); font-size: 1.25rem;
       display: flex; align-items: center; justify-content: center;
       margin: 0 auto 16px;
     }
-    .step h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
-    .step p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
+    .step h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+    .step p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
 
-    /* ── Safety ──────────────────────────────────── */
-    .safety { padding: 80px 24px; background: var(--bg-alt); }
-    .safety-inner { max-width: 900px; margin: 0 auto; }
-    .safety-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px; margin-top: 48px;
+    /* ── Security ── */
+    .security { padding: 100px 32px; }
+    .security-inner { max-width: 1120px; margin: 0 auto; }
+    .security-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
     }
-    .safety-item {
+    .security-card {
       display: flex; gap: 16px; align-items: flex-start;
-      background: white; padding: 24px; border-radius: 14px;
+      padding: 28px; border-radius: 14px;
       border: 1px solid var(--border);
     }
-    .safety-icon { font-size: 1.5rem; flex-shrink: 0; }
-    .safety-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
-    .safety-item p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; }
+    .security-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--bg-section);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .security-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+    .security-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.55; }
 
-    /* ── CTA ──────────────────────────────────── */
-    .cta { padding: 80px 24px; text-align: center; }
+    /* ── CTA ── */
+    .cta {
+      padding: 100px 32px;
+      background: var(--bg-warm);
+    }
     .cta-inner {
-      max-width: 700px; margin: 0 auto;
-      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-      border-radius: 24px; padding: 64px 40px;
-      color: white;
-    }
-    .cta-inner h2 {
-      font-size: clamp(1.75rem, 3vw, 2.25rem);
-      font-weight: 800; margin-bottom: 16px;
-    }
-    .cta-inner p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 32px; }
-    .btn-white {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: white; color: var(--primary);
-      padding: 14px 32px; border-radius: 12px;
-      font-size: 1.05rem; font-weight: 700;
-      text-decoration: none; transition: all 0.2s;
-    }
-    .btn-white:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
-
-    /* Get Started CTA */
-    .cta-section {
-      padding: 80px 24px 96px;
+      max-width: 640px; margin: 0 auto;
       text-align: center;
-      background: linear-gradient(180deg, var(--bg) 0%, #FFF5F5 100%);
     }
-    .cta-inner { max-width: 640px; margin: 0 auto; }
     .cta-inner h2 {
-      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-      font-weight: 800; margin-bottom: 16px; letter-spacing: -0.02em;
-      color: var(--text-primary);
+      font-family: var(--serif);
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      margin-bottom: 16px;
     }
-    .cta-subtitle {
-      font-size: 1.1rem; color: var(--text-secondary);
-      margin-bottom: 40px; line-height: 1.6;
+    .cta-inner p {
+      font-size: 1.05rem; color: var(--text-secondary);
+      margin-bottom: 40px; line-height: 1.7;
     }
-    .cta-buttons { margin-bottom: 24px; }
-    .cta-appstore {
-      display: inline-block; transition: transform 0.2s, opacity 0.2s;
-      border-radius: 12px; overflow: hidden;
+    .cta-store {
+      display: inline-block; transition: transform 0.2s;
+      margin-bottom: 20px;
     }
-    .cta-appstore:hover { transform: translateY(-3px); opacity: 0.9; }
-    .cta-appstore img { height: 60px; width: auto; display: block; }
-    .cta-android {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 10px 20px; border-radius: 24px;
-      background: var(--surface); color: var(--text-secondary);
-      font-size: 0.95rem; font-weight: 500;
+    .cta-store:hover { transform: translateY(-2px); }
+    .cta-store img { height: 52px; width: auto; display: block; }
+    .cta-android-note {
+      font-size: 0.875rem; color: var(--text-muted); font-weight: 500;
     }
-    .android-icon { font-size: 1.2rem; }
 
-    /* ── Footer ──────────────────────────────────── */
-    footer { padding: 48px 24px; border-top: 1px solid var(--border); }
-    .footer-inner {
-      max-width: 1100px; margin: 0 auto;
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 24px;
+    /* ── Footer ── */
+    footer {
+      padding: 48px 32px;
+      border-top: 1px solid var(--border);
     }
-    .footer-brand { display: flex; align-items: center; gap: 10px; }
-    .footer-brand img { width: 32px; height: 32px; border-radius: 8px; }
-    .footer-brand span { font-weight: 700; font-size: 1.1rem; }
+    .footer-inner {
+      max-width: 1120px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .footer-brand {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; color: var(--text-primary);
+    }
+    .footer-brand img { width: 28px; height: 28px; border-radius: 7px; }
+    .footer-brand span { font-family: var(--serif); font-size: 1.05rem; }
     .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
     .footer-links a {
-      text-decoration: none; color: var(--text-secondary);
-      font-size: 0.9rem; transition: color 0.2s;
+      text-decoration: none; color: var(--text-muted);
+      font-size: 0.825rem; font-weight: 500;
+      transition: color 0.2s;
     }
-    .footer-links a:hover { color: var(--primary); }
-    .footer-copy { font-size: 0.85rem; color: var(--text-muted); width: 100%; text-align: center; margin-top: 24px; }
+    .footer-links a:hover { color: var(--text-secondary); }
+    .footer-copy {
+      width: 100%; text-align: center;
+      font-size: 0.8rem; color: var(--text-muted);
+      margin-top: 20px;
+    }
 
-    /* ── Responsive ──────────────────────────────────── */
-    @media (max-width: 768px) {
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .hero { grid-template-columns: 1fr; text-align: center; gap: 48px; padding: 140px 24px 80px; }
+      .hero p { max-width: 100%; margin-left: auto; margin-right: auto; }
+      .hero-actions { justify-content: center; }
+      .ai-grid, .features-grid, .security-grid { grid-template-columns: repeat(2, 1fr); }
+      .steps { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
       .nav-links { display: none; }
       .hero { padding: 120px 20px 60px; }
-      .hero-stats { gap: 24px; }
-      .app-preview { gap: 16px; }
-      .phone-frame { width: 220px; height: 440px; }
-      .features, .how-it-works, .safety, .cta, .ai-section { padding: 60px 20px; }
-      .footer-inner { justify-content: center; text-align: center; }
-    }
-    @media (max-width: 480px) {
-      .phone-frame:nth-child(3) { display: none; }
-      .video-phone-frame { width: 240px; height: 500px; }
-      .hero-buttons { flex-direction: column; align-items: center; }
+      .hero-phone { width: 240px; height: 500px; }
+      .stats { grid-template-columns: 1fr; }
+      .ai-grid, .features-grid, .security-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; gap: 24px; }
+      .ai-features, .features, .how-it-works, .security, .cta { padding: 72px 20px; }
     }
   </style>
 </head>
 <body>
 
   <!-- Navigation -->
-  <nav>
+  <nav id="mainNav">
     <div class="nav-inner">
       <a href="/" class="nav-brand">
         <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663319984753/UmCoYtfqdmmvGBhC.png" alt="RideFlow">
         <span>RideFlow</span>
       </a>
       <div class="nav-links">
-        <a href="#preview">Preview</a>
         <a href="#ai">AI Features</a>
         <a href="#features">Features</a>
         <a href="#how-it-works">How It Works</a>
-        <a href="#safety">Safety</a>
-        <a href="#download" class="nav-cta">Download App</a>
+        <a href="#safety">Security</a>
+        <a href="#download" class="nav-cta">Get the App</a>
       </div>
     </div>
   </nav>
 
   <!-- Hero -->
   <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-badge">
-        <span class="dot"></span>
-        AI-Powered &middot; iOS &amp; Android
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="pulse"></span>
+        AI-Powered Coordination
       </div>
-      <h1>
-        Family Rides,<br>
-        <span class="gradient">Intelligently Coordinated</span>
-      </h1>
+      <h1>Family rides, intelligently coordinated.</h1>
       <p>
-        RideFlow uses AI to help families schedule rides, coordinate with riders, and keep everyone safe. Just say "Pick up Emma from soccer at 3pm" and the AI handles the rest.
+        RideFlow uses AI to help families schedule rides, coordinate with helpers, and keep everyone in the loop. Just say what you need in plain English.
       </p>
-      <div class="hero-buttons">
-        <a href="#download" class="btn-primary">
-          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 3v12m0 0l-4-4m4 4l4-4"/></svg>
+      <div class="hero-actions">
+        <a href="#download" class="btn-dark">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 3v12m0 0l-4-4m4 4l4-4"/></svg>
           Download Free
         </a>
-        <a href="#ai" class="btn-secondary">
-          See AI Features
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+        <a href="#ai" class="btn-ghost">
+          See how it works
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg>
         </a>
       </div>
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <div class="number">10+</div>
-          <div class="label">AI Features</div>
-        </div>
-        <div class="hero-stat">
-          <div class="number">40+</div>
-          <div class="label">App Screens</div>
-        </div>
-        <div class="hero-stat">
-          <div class="number">100%</div>
-          <div class="label">Free to Use</div>
-        </div>
-      </div>
     </div>
-  </section>
-
-  <!-- Video Preview -->
-  <section class="video-preview" id="preview">
-    <div class="video-inner">
-      <div class="section-label">App Preview</div>
-      <h2 class="section-title">See RideFlow in Action</h2>
-      <p class="section-subtitle">
-        Watch a quick walkthrough of how RideFlow helps families coordinate rides every day.
-      </p>
-      <div class="video-phone-frame">
-        <div class="video-phone-screen">
+    <div class="hero-visual">
+      <div class="hero-phone">
+        <div class="hero-phone-screen">
           <video autoplay muted loop playsinline poster="screenshots/raw_home.png">
             <source src="app_store_preview.mp4" type="video/mp4">
-            Your browser does not support the video tag.
           </video>
         </div>
       </div>
-      <p class="video-caption">21-second walkthrough of key features</p>
     </div>
   </section>
 
-  <!-- AI Features (NEW) -->
-  <section class="ai-section" id="ai">
-    <div class="ai-inner">
-      <div class="section-label">AI-Powered</div>
-      <h2 class="section-title">Your Intelligent Ride Assistant</h2>
-      <p class="section-subtitle">
-        RideFlow's AI understands your family's schedule, detects problems before they happen, and helps you coordinate rides with natural language.
+  <!-- Stats -->
+  <div class="stats animate-on-scroll">
+    <div class="stat">
+      <div class="stat-number">10+</div>
+      <div class="stat-label">AI Features</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">40+</div>
+      <div class="stat-label">App Screens</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">100%</div>
+      <div class="stat-label">Free to Use</div>
+    </div>
+  </div>
+
+  <!-- AI Features -->
+  <section class="ai-features" id="ai">
+    <div class="ai-features-inner">
+      <div class="section-eyebrow animate-on-scroll">AI-Powered</div>
+      <h2 class="section-heading animate-on-scroll">Your intelligent ride assistant</h2>
+      <p class="section-desc animate-on-scroll">
+        RideFlow's AI understands your family's schedule, detects problems before they happen, and coordinates rides with natural language.
       </p>
       <div class="ai-grid">
-        <div class="ai-feature-card">
-          <div class="ai-icon">&#9997;</div>
+        <div class="ai-card animate-on-scroll">
+          <div class="ai-card-icon">NL</div>
           <h3>Natural Language Scheduling</h3>
-          <p>Type "Pick up Emma from soccer at 3pm Tuesday" and the AI auto-fills the event form. Add voice input for hands-free creation.</p>
+          <p>Type "Pick up Emma from soccer at 3pm Tuesday" and the AI auto-fills the event form with all the details.</p>
         </div>
-        <div class="ai-feature-card">
-          <div class="ai-icon">&#129302;</div>
+        <div class="ai-card animate-on-scroll">
+          <div class="ai-card-icon">@</div>
           <h3>@AI Chat Assistant</h3>
-          <p>Ask @AI anything in your family or group chat. Get schedule summaries, check ride availability, or find out who's driving tomorrow.</p>
+          <p>Ask @AI anything in your family chat. Get schedule summaries, check availability, or find out who's driving tomorrow.</p>
         </div>
-        <div class="ai-feature-card">
-          <div class="ai-icon">&#127774;</div>
+        <div class="ai-card animate-on-scroll">
+          <div class="ai-card-icon">AM</div>
           <h3>Daily Briefing</h3>
-          <p>Every morning, get a personalized AI summary of today's rides, potential conflicts, and what needs your attention.</p>
+          <p>Every morning, get a personalized AI summary of today's rides, potential conflicts, and what needs attention.</p>
         </div>
-        <div class="ai-feature-card">
-          <div class="ai-icon">&#9888;</div>
+        <div class="ai-card animate-on-scroll">
+          <div class="ai-card-icon">!</div>
           <h3>Proactive Smart Alerts</h3>
           <p>AI detects overdue rides, time conflicts, tight travel windows, and unassigned events before they become problems.</p>
         </div>
-        <div class="ai-feature-card">
-          <div class="ai-icon">&#128202;</div>
+        <div class="ai-card animate-on-scroll">
+          <div class="ai-card-icon">W</div>
           <h3>Weekly Recap</h3>
-          <p>AI-generated end-of-week summary with ride stats, on-time rates, top riders, and actionable tips for the next week.</p>
+          <p>AI-generated end-of-week summary with ride stats, on-time rates, top riders, and actionable tips.</p>
         </div>
-        <div class="ai-feature-card">
-          <div class="ai-icon">&#128161;</div>
+        <div class="ai-card animate-on-scroll">
+          <div class="ai-card-icon">S</div>
           <h3>Smart Suggestions</h3>
           <p>AI detects recurring patterns and suggests missing events, predicts scheduling needs, and recommends optimizations.</p>
         </div>
@@ -586,39 +496,39 @@
   <!-- Core Features -->
   <section class="features" id="features">
     <div class="features-inner">
-      <div class="section-label">Features</div>
-      <h2 class="section-title">Everything Your Family Needs</h2>
-      <p class="section-subtitle">
+      <div class="section-eyebrow animate-on-scroll">Features</div>
+      <h2 class="section-heading animate-on-scroll">Everything your family needs</h2>
+      <p class="section-desc animate-on-scroll">
         From scheduling to real-time tracking, RideFlow covers every aspect of coordinating rides for your children.
       </p>
       <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon fi-pink">&#128197;</div>
+        <div class="feature-item animate-on-scroll">
+          <div class="feature-item-icon fi-rose">&#128197;</div>
           <h3>Smart Scheduling</h3>
           <p>Day, week, and month views with recurring events, multi-child support, color-coded timelines, and automatic reminders.</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon fi-green">&#128205;</div>
+        <div class="feature-item animate-on-scroll">
+          <div class="feature-item-icon fi-emerald">&#128205;</div>
           <h3>Real-Time Location</h3>
           <p>Track your rider's location on an interactive map with speed, ETA, and geofence arrival alerts.</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon fi-purple">&#128247;</div>
+        <div class="feature-item animate-on-scroll">
+          <div class="feature-item-icon fi-violet">&#128247;</div>
           <h3>Photo &amp; Video Updates</h3>
           <p>Riders share status reports with photos and videos. AI-powered notes automatically describe what's happening.</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon fi-amber">&#128172;</div>
+        <div class="feature-item animate-on-scroll">
+          <div class="feature-item-icon fi-amber">&#128172;</div>
           <h3>Family &amp; Group Chat</h3>
           <p>Built-in messaging for families and ride groups. Share updates, coordinate in real time, and ask @AI for help.</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon fi-blue">&#128276;</div>
+        <div class="feature-item animate-on-scroll">
+          <div class="feature-item-icon fi-sky">&#128276;</div>
           <h3>Smart Notifications</h3>
           <p>Configurable push notifications with smart alert preferences. Set quiet hours and choose which alerts matter most.</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon fi-cyan">&#127911;</div>
+        <div class="feature-item animate-on-scroll">
+          <div class="feature-item-icon fi-teal">&#127911;</div>
           <h3>Voice Input</h3>
           <p>Hands-free event creation with voice recording and transcription. Dictate ride details while on the go.</p>
         </div>
@@ -629,61 +539,61 @@
   <!-- How It Works -->
   <section class="how-it-works" id="how-it-works">
     <div class="how-inner">
-      <div class="section-label">How It Works</div>
-      <h2 class="section-title">Get Started in Minutes</h2>
-      <p class="section-subtitle">
+      <div class="section-eyebrow animate-on-scroll">How It Works</div>
+      <h2 class="section-heading animate-on-scroll">Get started in minutes</h2>
+      <p class="section-desc animate-on-scroll">
         Setting up RideFlow is quick and easy. Here's how your family gets coordinated.
       </p>
       <div class="steps">
-        <div class="step">
-          <div class="step-number">1</div>
+        <div class="step animate-on-scroll">
+          <div class="step-num">1</div>
           <h3>Create Your Family</h3>
-          <p>Sign in with Google, create a family group, and invite your riders with a simple invite code or QR scan.</p>
+          <p>Sign in with Google, create a family group, and invite riders with a simple code or QR scan.</p>
         </div>
-        <div class="step">
-          <div class="step-number">2</div>
+        <div class="step animate-on-scroll">
+          <div class="step-num">2</div>
           <h3>Add Your Schedule</h3>
-          <p>Type naturally or use voice input. Say "Pick up Emma from soccer at 3pm" and the AI creates the event.</p>
+          <p>Type naturally or use voice. Say "Pick up Emma from soccer at 3pm" and the AI creates the event.</p>
         </div>
-        <div class="step">
-          <div class="step-number">3</div>
+        <div class="step animate-on-scroll">
+          <div class="step-num">3</div>
           <h3>Track &amp; Communicate</h3>
-          <p>Follow rides in real time, receive photo updates, and chat with your riders. Ask @AI for instant summaries.</p>
+          <p>Follow rides in real time, receive photo updates, and chat with your riders.</p>
         </div>
-        <div class="step">
-          <div class="step-number">4</div>
+        <div class="step animate-on-scroll">
+          <div class="step-num">4</div>
           <h3>Review &amp; Relax</h3>
-          <p>Get AI-powered weekly recaps, smart alerts for conflicts, and know your children are always safe.</p>
+          <p>Get AI-powered weekly recaps, smart alerts for conflicts, and peace of mind.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Safety & Privacy -->
-  <section class="safety" id="safety">
-    <div class="safety-inner">
-      <div class="section-label">Safety &amp; Privacy</div>
-      <h2 class="section-title">Built with Security First</h2>
-      <p class="section-subtitle">
+  <!-- Security -->
+  <section class="security" id="safety">
+    <div class="security-inner">
+      <div class="section-eyebrow animate-on-scroll">Security &amp; Privacy</div>
+      <h2 class="section-heading animate-on-scroll">Built with security first</h2>
+      <p class="section-desc animate-on-scroll">
         Your family's data is protected with industry-standard security practices.
       </p>
-      <div class="safety-grid">
-        <div class="safety-item">
-          <span class="safety-icon">&#128274;</span>
+      <div class="security-grid">
+        <div class="security-card animate-on-scroll">
+          <div class="security-icon">&#128274;</div>
           <div>
             <h4>Google OAuth</h4>
             <p>Secure authentication through Google. We never store passwords.</p>
           </div>
         </div>
-        <div class="safety-item">
-          <span class="safety-icon">&#128737;</span>
+        <div class="security-card animate-on-scroll">
+          <div class="security-icon">&#128737;</div>
           <div>
             <h4>Family-Scoped Access</h4>
             <p>Data is strictly isolated per family. Members can only see their own family's information.</p>
           </div>
         </div>
-        <div class="safety-item">
-          <span class="safety-icon">&#128272;</span>
+        <div class="security-card animate-on-scroll">
+          <div class="security-icon">&#128272;</div>
           <div>
             <h4>Encrypted Data</h4>
             <p>All data encrypted in transit with TLS. Location data only shared with authorized family members.</p>
@@ -693,63 +603,56 @@
     </div>
   </section>
 
-
-  <!-- Get Started CTA -->
-  <section class="cta-section" id="download">
-    <div class="cta-inner">
-      <h2>Ready to Simplify Your Family's Rides?</h2>
-      <p class="cta-subtitle">Join families who have replaced scattered texts and missed pickups with one seamless app.</p>
-      <div class="cta-buttons">
-        <a href="#" class="cta-appstore" aria-label="Download on the App Store">
-          <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" height="60">
-        </a>
-      </div>
-      <div class="cta-android">
-        <span class="android-icon">&#129302;</span>
-        <span>Android version coming soon</span>
-      </div>
+  <!-- CTA -->
+  <section class="cta" id="download">
+    <div class="cta-inner animate-on-scroll">
+      <h2>Ready to simplify your family's rides?</h2>
+      <p>Join families who have replaced scattered texts and missed pickups with one seamless app.</p>
+      <a href="#" class="cta-store" aria-label="Download on the App Store">
+        <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
+      </a>
+      <div class="cta-android-note">Android version coming soon</div>
     </div>
   </section>
 
   <!-- Footer -->
   <footer>
     <div class="footer-inner">
-      <div class="footer-brand">
+      <a href="/" class="footer-brand">
         <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663319984753/UmCoYtfqdmmvGBhC.png" alt="RideFlow">
         <span>RideFlow</span>
-      </div>
+      </a>
       <div class="footer-links">
-        <a href="#preview">Preview</a>
         <a href="#ai">AI Features</a>
         <a href="#features">Features</a>
         <a href="#how-it-works">How It Works</a>
-        <a href="#safety">Safety</a>
         <a href="privacy-policy.html">Privacy Policy</a>
         <a href="terms-of-service.html">Terms of Service</a>
         <a href="mailto:support@ridehelp.top">Contact</a>
       </div>
       <div class="footer-copy">
-        &copy; 2026 RideFlow. All rights reserved. Made with care for families everywhere.
+        &copy; 2026 RideFlow. All rights reserved.
       </div>
     </div>
   </footer>
 
-  <!-- GDPR Cookie Consent Banner -->
-  <div id="cookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a1a2e;color:#fff;padding:16px 24px;z-index:9999;box-shadow:0 -2px 12px rgba(0,0,0,0.2);font-family:Inter,sans-serif;">
-    <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
-      <div style="flex:1;min-width:280px;">
-        <p style="font-size:14px;line-height:1.5;margin:0;">We use cookies to improve your experience and analyze site traffic. By continuing to use this site, you consent to our use of cookies. See our <a href="/privacy-policy.html" style="color:#E91E63;text-decoration:underline;">Privacy Policy</a> and <a href="/terms-of-service.html" style="color:#E91E63;text-decoration:underline;">Terms of Service</a>.</p>
-      </div>
-      <div style="display:flex;gap:8px;flex-shrink:0;">
-        <button onclick="acceptCookies()" style="background:#E91E63;color:#fff;border:none;padding:10px 24px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;">Accept All</button>
-        <button onclick="rejectCookies()" style="background:transparent;color:#fff;border:1px solid #555;padding:10px 24px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;">Reject Non-Essential</button>
+  <!-- Cookie Banner -->
+  <div id="cookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;padding:16px 24px;background:var(--text-primary);color:white;font-family:var(--sans);">
+    <div style="max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+      <p style="font-size:0.825rem;line-height:1.5;flex:1;min-width:280px;margin:0;">
+        We use cookies to improve your experience. See our <a href="/privacy-policy.html" style="color:var(--accent);text-decoration:underline;">Privacy Policy</a>.
+      </p>
+      <div style="display:flex;gap:8px;">
+        <button onclick="acceptCookies()" style="background:white;color:var(--text-primary);border:none;padding:8px 20px;border-radius:6px;font-size:0.825rem;font-weight:600;cursor:pointer;">Accept</button>
+        <button onclick="rejectCookies()" style="background:transparent;color:white;border:1px solid rgba(255,255,255,0.25);padding:8px 20px;border-radius:6px;font-size:0.825rem;font-weight:600;cursor:pointer;">Decline</button>
       </div>
     </div>
   </div>
+
   <script>
+    // Cookie consent
     (function() {
-      var consent = localStorage.getItem('rideflow_cookie_consent');
-      if (!consent) {
+      if (!localStorage.getItem('rideflow_cookie_consent')) {
         document.getElementById('cookieBanner').style.display = 'block';
       }
     })();
@@ -761,6 +664,22 @@
       localStorage.setItem('rideflow_cookie_consent', 'rejected');
       document.getElementById('cookieBanner').style.display = 'none';
     }
+
+    // Nav scroll effect
+    window.addEventListener('scroll', () => {
+      document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
   </script>
 
 </body>
