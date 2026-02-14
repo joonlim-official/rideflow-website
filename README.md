@@ -42,19 +42,16 @@ The project is architected as a **full-stack monorepo** containing a React Nativ
 
 ---
 
-## Screenshots
+## App Preview
 
 <p align="center">
-  <img src="screenshots/home.png" alt="AI Daily Briefing" width="180" />
-  <img src="screenshots/schedule.png" alt="Schedule at a Glance" width="180" />
-  <img src="screenshots/status.png" alt="Live Status Reports" width="180" />
-  <img src="screenshots/chat.png" alt="Family Chat" width="180" />
+  <a href="https://ridehelp.top/#preview">
+    <img src="screenshots/raw_home.png" alt="RideFlow Home Screen" width="220" />
+  </a>
 </p>
 
 <p align="center">
-  <img src="screenshots/media.png" alt="Media Gallery" width="180" />
-  <img src="screenshots/add_event.png" alt="Smart Event Creation" width="180" />
-  <img src="screenshots/settings.png" alt="Family Settings" width="180" />
+  <strong><a href="https://ridehelp.top/#preview">Watch the full video walkthrough on ridehelp.top &rarr;</a></strong>
 </p>
 
 ---
